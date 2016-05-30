@@ -10,17 +10,23 @@ module Shopify
         end
       end
 
+      throttle_api_calls
+
       response = RestClient.get shopify_url + (final_resource resource) + params
       JSON.parse response.force_encoding("utf-8")
     end
 
     def api_post resource, data
+      throttle_api_calls
+
       response = RestClient.post shopify_url + resource, data.to_json,
         :content_type => :json, :accept => :json
       JSON.parse response.force_encoding("utf-8")
     end
 
     def api_put resource, data
+      throttle_api_calls
+
       response = RestClient.put shopify_url + resource, data.to_json,
         :content_type => :json, :accept => :json
       JSON.parse response.force_encoding("utf-8")
@@ -40,6 +46,12 @@ module Shopify
         resource += '.json'
       end
       resource
+    end
+
+    private
+
+    def throttle_api_calls
+      sleep Util.shopify_wait @config if Util.shopify_wait(@config).present?
     end
   end
 end
