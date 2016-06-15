@@ -9,10 +9,12 @@ gem 'capistrano'
 gem 'rest-client'
 gem 'require_all'
 
-group :development do
+group :development, :test do
   gem 'shotgun'
   gem 'pry'
+  gem 'pry-byebug'
   gem 'awesome_print'
+  gem 'dotenv'
 end
 
 group :test do

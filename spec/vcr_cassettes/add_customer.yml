@@ -1,0 +1,139 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/customers.json
+    body:
+      encoding: UTF-8
+      string: '{"customer":{"first_name":null,"last_name":null,"email":"spree@example.com","addresses":[{"address1":"","address2":"","zip":"","city":"","province":"","country":"","phone":""},{"address1":"","address2":"","zip":"","city":"","province":"","country":"","phone":""}]}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '265'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 18:10:19 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 201 Created
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      Location:
+      - https://SHOPIFY_HOST/admin/customers/3539738246
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/7f8e008b-22c2-4b5c-9314-5f4f2275b96a?source%5Baction%5D=create&source%5Bcontroller%5D=admin%2Fcustomers&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - 7f8e008b-22c2-4b5c-9314-5f4f2275b96a
+    body:
+      encoding: UTF-8
+      string: '{"customer":{"id":3539738246,"email":"spree@example.com","accepts_marketing":false,"created_at":"2016-06-16T14:10:19-04:00","updated_at":"2016-06-16T14:10:19-04:00","first_name":null,"last_name":null,"orders_count":0,"state":"disabled","total_spent":"0.00","last_order_id":null,"note":null,"verified_email":true,"multipass_identifier":null,"tax_exempt":false,"tags":"","last_order_name":null,"addresses":[]}}'
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 18:10:19 GMT
+- request:
+    method: post
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/customers/3539738246/metafields.json
+    body:
+      encoding: UTF-8
+      string: '{"metafield":{"namespace":"wombat","key":"wombat_id","value":1,"value_type":"string"}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '86'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 18:10:20 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 201 Created
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      Location:
+      - https://SHOPIFY_HOST/admin/metafields/22320138694
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/8deec86b-6c43-4e98-9774-1a244a9471be?source%5Baction%5D=create&source%5Bcontroller%5D=admin%2Fmetafields&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - 8deec86b-6c43-4e98-9774-1a244a9471be
+    body:
+      encoding: UTF-8
+      string: '{"metafield":{"id":22320138694,"namespace":"wombat","key":"wombat_id","value":"1","value_type":"string","description":null,"owner_id":3539738246,"created_at":"2016-06-16T14:10:20-04:00","updated_at":"2016-06-16T14:10:20-04:00","owner_resource":"customer"}}'
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 18:10:20 GMT
+recorded_with: VCR 2.9.2

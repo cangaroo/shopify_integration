@@ -1,0 +1,161 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/customers/3539738246.json
+    body:
+      encoding: UTF-8
+      string: '{"customer":{"first_name":null,"last_name":null,"email":"spree123@example.com","addresses":[{"address1":"","address2":"","zip":"","city":"","province":"","country":"","phone":""},{"address1":"","address2":"","zip":"","city":"","province":"","country":"","phone":""}]}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '268'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 18:25:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      Location:
+      - https://SHOPIFY_HOST/admin/customers/3539738246
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/a04cf042-745e-4864-b60b-dc32c69e4be1?source%5Baction%5D=update&source%5Bcontroller%5D=admin%2Fcustomers&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      Content-Encoding:
+      - gzip
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - a04cf042-745e-4864-b60b-dc32c69e4be1
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwAAAP//dJDdTsMwDEbfxdfdlP6ssFztIbhDKDKJO0UkbRS7
+        qNK0dyctUAESt9b5ju3vBnZmmSJl0DfwDnR7as8P7WPT9RVQRB9AA6dMVDft
+        hRaMKdDRThEqQGspCZuI+Y3Ej1fQAwamCmwmFHIGpaQbVfcH1R/q/qnudK10
+        fT6oTitVFHNy/4HNSbfNDg4+s5gRI4Ee5xAqCPhnMGVHmY2d5rHYVAUsxV28
+        zjO+BnJFI5NgMJxoRUAdN/dm2tJmbeDTNk6ym98p+8GXM78KkTyXJ+McxCdk
+        LqniW4n8nRBcDC0Uk+ydCF657Py97+f96FwmZirU88v9/gEAAP//AwAVXfMa
+        mwEAAA==
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 18:25:32 GMT
+- request:
+    method: put
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/customers/3539738246.json
+    body:
+      encoding: UTF-8
+      string: '{"customer":{"first_name":null,"last_name":null,"email":"spree123@example.com","addresses":[{"address1":"","address2":"","zip":"","city":"","province":"","country":"","phone":""},{"address1":"","address2":"","zip":"","city":"","province":"","country":"","phone":""}]}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '268'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 18:25:36 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      Location:
+      - https://SHOPIFY_HOST/admin/customers/3539738246
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/41105bf4-6697-4645-9ad0-63e3b2bb0d3b?source%5Baction%5D=update&source%5Bcontroller%5D=admin%2Fcustomers&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      Content-Encoding:
+      - gzip
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - 41105bf4-6697-4645-9ad0-63e3b2bb0d3b
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwAAAP//dJDdTsMwDEbfxdfdlP6ssFztIbhDKDKJO0UkbRS7
+        qNK0dyctUAESt9b5ju3vBnZmmSJl0DfwDnR7as8P7WPT9RVQRB9AA6dMVDft
+        hRaMKdDRThEqQGspCZuI+Y3Ej1fQAwamCmwmFHIGpaQbVfcH1R/q/qnudK10
+        fT6oTitVFHNy/4HNSbfNDg4+s5gRI4Ee5xAqCPhnMGVHmY2d5rHYVAUsxV28
+        zjO+BnJFI5NgMJxoRUAdN/dm2tJmbeDTNk6ym98p+8GXM78KkTyXJ+McxCdk
+        LqniW4n8nRBcDC0Uk+ydCF657Py97+f96FwmZirU88v9/gEAAP//AwAVXfMa
+        mwEAAA==
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 18:25:36 GMT
+recorded_with: VCR 2.9.2

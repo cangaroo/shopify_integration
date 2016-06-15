@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/variants/21432384710.json
+    body:
+      encoding: UTF-8
+      string: '{"variant":{"inventory_quantity":"10"}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '39'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 19:11:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      Location:
+      - https://SHOPIFY_HOST/admin/products/6781825798/variants/21432384710
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/29e15e85-2452-42ce-a127-450cb9490a3b?source%5Baction%5D=update&source%5Bcontroller%5D=admin%2Fproduct_variants&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      Content-Encoding:
+      - gzip
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - 29e15e85-2452-42ce-a127-450cb9490a3b
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwAAAP//dFHLcsMgEPuVDmenA/gRl3M/IXeG2NjZCQbCI20m
+        k3/vEjdtD+lRrLSSlis5qwDKJiKuBEYiOGtqXvfNltGK+ODGPCRZBt22Zz1v
+        t299RRIko4kg73pS2aSX3R0XPgzlnb5SijAeMwLG66YtQxchgbNEsIrMQS2R
+        CPQAe9Y2uXCR3hkYLqgYtb2gYHCLV0FLleT3YpuNqciUzQTGLCiTUYfz6rko
+        m5Uhfxfik5p14eE8HpyHqex1vsRgT/KvE/4wWmH9gEPQKukR86CUU9ZtaLdh
+        7Y51gjHBmw1txL139uMTYrdjbSE2/Q8xqU+1L5dMIeuK7FUY3FjKlBoLZr9f
+        fnX/rXXK+F+Q8FLljz40zAc0wps/gMwWivVxLp3MKP/TBn3KEHSU8QDeg53X
+        JLfbFwAAAP//AwDtL3VHFwIAAA==
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 19:11:48 GMT
+recorded_with: VCR 2.9.2

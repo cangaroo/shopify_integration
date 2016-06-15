@@ -18,6 +18,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     awesome_print (1.2.0)
+    byebug (9.0.5)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -67,6 +68,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -130,11 +134,13 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   capistrano
+  dotenv
   endpoint_base!
   foreman (= 0.66.0)
   guard-rspec
   jbuilder (= 2.0.7)
   pry
+  pry-byebug
   rack-test
   rb-fsevent (~> 0.9.1)
   require_all
@@ -148,3 +154,6 @@ DEPENDENCIES
   unicorn
   vcr
   webmock
+
+BUNDLED WITH
+   1.11.2
