@@ -40,7 +40,7 @@ class ShopifyIntegration < EndpointBase::Sinatra::Base
           response['objects'].each do |obj|
             ## Check if object has a metafield with a Wombat ID in it,
             ## if so change object ID to that prior to adding to Wombat
-            wombat_id = shopify.wombat_id_metafield obj_name, obj['shopify_id']
+            wombat_id = shopify.wombat_id_metafield obj_name, obj['shopify_id'] if obj_name != "shipment"
             unless wombat_id.nil?
               obj['id'] = wombat_id
             end
