@@ -52,4 +52,8 @@ class Util
     wombat_config['shopify_host']
   end
 
+  def self.shopify_wait wombat_config
+    wombat_config['shopify_wait'].to_f
+  end
+
 end

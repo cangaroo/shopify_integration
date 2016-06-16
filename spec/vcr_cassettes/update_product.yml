@@ -1,0 +1,86 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/products/6781825798.json
+    body:
+      encoding: UTF-8
+      string: '{"product":{"title":"Update product title","body_html":null,"product_type":"None","options":[{"name":"Default"}],"images":[]}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '126'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 17:57:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      Location:
+      - https://SHOPIFY_HOST/admin/products/6781825798
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/bafa9480-27ef-4de7-8a0c-d652600fb06a?source%5Baction%5D=update&source%5Bcontroller%5D=admin%2Fproducts&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      Content-Encoding:
+      - gzip
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - bafa9480-27ef-4de7-8a0c-d652600fb06a
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwAAAP//jFLLjtswDPyVQOe4sGzHcXXuuaf0VCwM2ZJtYmVJ
+        0SNdY5F/r+RH0gbZxd5EihzODPmOtFHMtw6RdwQMkfJY4So7HL9Xe+TACY4I
+        +qUZdXy3Vu6W9B41ik314EaBiPRC7NGFS6ZMaKBtyy0XvHVGSTj7WL12127S
+        EfOnkjHbGh6gWU0DAZSluEzSMsGHEy4JxiQrkrQgaRoKByrZTMb4ZkqUTAwF
+        YROnXITxM8NHmPKEc3I4khzfYLRvBNjhKxMdH7UIqLX1XQdvm8g7gm3VLKUX
+        qqEidtDehji8LtQAlS5EvxdbM1zkWV4VR5zerfjI7x+8o1643Wk1WhtoYz79
+        NhOzr36ZopUFB0oigveoN3QM8wI8yLAIp8xUayWgnUIx43KKbqtRU8OD9nrF
+        XDR1XnQgxBjaasvNZRk3UulnXXfAkKI9j3Vbq9KRAX7CevnJ/i/Mt/DLi3++
+        2mf7om+0if4543m4TmpaxW4SYQzEZ8fX+Kbp7MOmwE2zi3849EOYFKzegtpL
+        iLNf+yhKsPqDVsPPHgy3tR1Aa5D9wuT6smm/X0OFD1mWlsXxk2OQdPznFh63
+        faHC8wj4YPtLHDdrjZ/bexF9vf4FAAD//wMA4qA2L+4DAAA=
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 17:57:31 GMT
+recorded_with: VCR 2.9.2

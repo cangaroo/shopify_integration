@@ -1,0 +1,148 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/customers.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 17:59:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/13f1e8e0-e966-482a-b9e1-ac571a8d04d7?source%5Baction%5D=index&source%5Bcontroller%5D=admin%2Fcustomers&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      Content-Encoding:
+      - gzip
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - 13f1e8e0-e966-482a-b9e1-ac571a8d04d7
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwAAAP//7FJNa9wwEP0ri87eIHntdeNTmz300h5CcyvFzEqz
+        G1FbcvUR0oT8oPyO/LGO/LXbQKGFXgrFwkiPN29m3swjk9EH26HzrP78yLRi
+        9WazKaqiyiueMexAt6xme6clvt1r76Xtugv6sYyBlNgH33TgvmLQ5sjqA7Qe
+        MyYdQkDVQKDYnIvtmpdrsb0RRc2rOn+z5nThJBF79ZqYzo0o66KiShbiQTsf
+        GgMdEvEqVUNgCyfsExh5iw+EWqeonUbaaEiVmvCBchBFaQ/7FhVxgg3QNr7H
+        RGH8YsgxyA3RTfLBxLbNmLEpdrzfodMHTeVOtgQXqdkutkH34D1FkV5iuDki
+        wH2D99j1YfEmwJG8Zj/nG5sYYxQegCQbUMqhJ+40lvJScMFLnv+RGzSqHsz3
+        WXwSFclusaL62YLlY1VSB2KzbxH3KOndO3unjUyq1zM2eOsSbQcGFBD0oHt6
+        vs+vxIdtirq1ZunovNDVqbRZmUalBvndSXrGdu/OsElnyTk5NQ7iaWkEz3a5
+        oF3eXm5K/ldNW6m42tnowvrjy3NwcPyljdfx5fnf8XFY0afs/8L91sJ9oe8H
+        AAAA//8DAAK0JLlBBQAA
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 17:59:25 GMT
+- request:
+    method: get
+    uri: https://SHOPIFY_APIKEY:SHOPIFY_PASSWORD@SHOPIFY_HOST/admin/customers/3334747270/metafields.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 16 Jun 2016 17:59:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      Status:
+      - 200 OK
+      X-Frame-Options:
+      - DENY
+      X-Shopid:
+      - '12103552'
+      X-Shardid:
+      - '5'
+      X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      Http-X-Shopify-Shop-Api-Call-Limit:
+      - 1/40
+      X-Stats-Userid:
+      - '0'
+      X-Stats-Apiclientid:
+      - '1294732'
+      X-Stats-Apipermissionid:
+      - '18429120'
+      X-Xss-Protection:
+      - 1; mode=block; report=/xss-report/5976e8be-199f-47ec-8e7d-0a620c641f8a?source%5Baction%5D=index&source%5Bcontroller%5D=admin%2Fmetafields&source%5Bsection%5D=admin
+      P3p:
+      - CP="NOI DSP COR NID ADMa OPTa OUR NOR"
+      Content-Encoding:
+      - gzip
+      X-Dc:
+      - ash,chi2
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Request-Id:
+      - 5976e8be-199f-47ec-8e7d-0a620c641f8a
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAwAAAP//qlbKTS1JTMtMzUkpVrKKjq0FAAAA//8DADsLCWQR
+        AAAA
+    http_version: 
+  recorded_at: Thu, 16 Jun 2016 17:59:26 GMT
+recorded_with: VCR 2.9.2

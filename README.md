@@ -21,6 +21,7 @@ The following parameters must be setup within [Wombat](http://wombat.co):
 | shopify_apikey   | Shopify account API key (required) |
 | shopify_password | Shopify account password (required) |
 | shopify_host     | Shopify account host, no 'http://' (required) |
+| shopify_wait     | Shopify API wait between calls, `0.5` for 0.5 second |
 
 ## Webhooks
 
