@@ -35,8 +35,8 @@ corresponding Shopify object.
   objects associated with all orders.
 * **get_products**: Retrieves a list of products from shopify.
   Also returns a list of inventory items, one for each product.
-* **add_product**
-* **update_product**
+* **add_product**: Add product without the ability to set variants inventory.
+* **update_product**: Update product with the ability to set variants inventory.
 * **get_inventory**: Retrieves one inventory items for each product.
 * **get_shipments**: Retrieves shipments recorded in Shopify.
 * **update_shipment**
