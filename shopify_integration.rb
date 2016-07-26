@@ -4,6 +4,8 @@ require "endpoint_base"
 require_all 'lib'
 
 class ShopifyIntegration < EndpointBase::Sinatra::Base
+  endpoint_key ENV["ENDPOINT_KEY"]
+
   post '/*_shipment' do # /add_shipment or /update_shipment
     summary = Shopify::Shipment.new(@payload['shipment'], @config).ship!
 
