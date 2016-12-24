@@ -1,10 +1,10 @@
-ruby '2.1.2'
+ruby '2.3.1'
 source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'tilt', '~> 1.4.1'
 gem 'tilt-jbuilder'
-gem 'jbuilder', '2.0.7'
+gem 'jbuilder'
 gem 'capistrano'
 gem 'rest-client'
 gem 'require_all'
@@ -26,7 +26,7 @@ group :test do
 end
 
 group :production do
-  gem 'foreman', '0.66.0'
+  gem 'foreman'
   gem 'unicorn'
 end
 
