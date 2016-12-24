@@ -1,7 +1,7 @@
 require "sinatra"
 require "endpoint_base"
 
-require_all 'lib'
+require_all File.dirname(__FILE__) + '/lib'
 
 class ShopifyIntegration < EndpointBase::Sinatra::Base
   post '/*_shipment' do # /add_shipment or /update_shipment
