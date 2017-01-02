@@ -35,6 +35,8 @@ class Order
       @line_items << line_item.add_shopify_obj(shopify_li, shopify_api)
     end
 
+    @shipping_method = shopify_order['shipping_lines'].first['code']
+
     unless shopify_order['shipping_address'].nil?
       @shipping_address = {
         'firstname' => shopify_order['shipping_address']['first_name'],
@@ -84,6 +86,7 @@ class Order
         'order' => @totals_order
       },
       'line_items' => Util.wombat_array(@line_items),
+      'shipping_method' => @shipping_method,
       'adjustments' => [
         {
           'name' => 'Tax',
