@@ -35,7 +35,7 @@ class Order
       @line_items << line_item.add_shopify_obj(shopify_li, shopify_api)
     end
 
-    @shipping_method = shopify_order['shipping_lines'].first['code']
+    @shipping_method = (shopify_order['shipping_lines'].first || {})['code']
 
     unless shopify_order['shipping_address'].nil?
       @shipping_address = {
