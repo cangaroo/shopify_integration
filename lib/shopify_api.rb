@@ -244,7 +244,15 @@ class ShopifyAPI
 
   def get_objs objs_name, obj_class
     objs = Array.new
-    shopify_objs = api_get objs_name
+
+    params = {}
+
+    if @payload["last_poll"].present?
+      params[:updated_at_min] = Time.at(@payload["last_poll"]).to_s(:iso8601)
+    end
+
+    shopify_objs = api_get objs_name, params
+
     if shopify_objs.values.first.kind_of?(Array)
       shopify_objs.values.first.each do |shopify_obj|
         obj = obj_class.new
