@@ -48,6 +48,9 @@ class ShopifyIntegration < EndpointBase::Sinatra::Base
             ## Add object to Wombat
             add_object obj_name, obj
           end
+
+          add_value obj_name.pluralize, [] if response['objects'].empty?
+
           add_parameter 'since', Time.now.utc.iso8601
 
         when 'add'
