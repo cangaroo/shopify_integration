@@ -13,7 +13,7 @@ class Order
     @placed_on = shopify_order['created_at']
     @totals_item = shopify_order['total_line_items_price'].to_f
     @totals_tax = shopify_order['total_tax'].to_f
-    @totals_discounts = shopify_order['total_discounts'].to_f
+    @totals_discounts = -1 * shopify_order['total_discounts'].to_f
     @totals_shipping = 0.00
     shopify_order['shipping_lines'].each do |shipping_line|
       @totals_shipping += shipping_line['price'].to_f
