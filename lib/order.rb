@@ -25,7 +25,7 @@ class Order
           transaction.status == 'success'
         @totals_payment += transaction.amount.to_f
         payment = Payment.new
-        @payments << payment.add_shopify_obj(transaction, shopify_api)
+        @payments << payment.add_shopify_obj(transaction, shopify_api, shopify_order)
       end
     end
     @totals_order = shopify_order['total_price'].to_f
