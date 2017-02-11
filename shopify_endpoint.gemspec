@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'shopify'
   s.add_runtime_dependency 'sinatra'
-  s.add_runtime_dependency 'tilt', '~> 1.4.1'
+  s.add_runtime_dependency 'tilt'
   s.add_runtime_dependency 'tilt-jbuilder'
   s.add_runtime_dependency 'rest-client'
   s.add_runtime_dependency 'require_all'
