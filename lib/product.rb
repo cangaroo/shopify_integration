@@ -88,6 +88,7 @@ class Product
       'id' => @shopify_id.to_s,
       'shopify_id' => @shopify_id.to_s,
       'source' => @source,
+      'channel' => 'Shopify',
       'name' => @name,
       'sku' => @name,
       'description' => @description,

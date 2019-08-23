@@ -10,7 +10,7 @@ class Payment
   end
 
   def wombat_obj
-    order['payment_details'].slice('credit_card_number', 'credit_card_company').merge(
+    order['payment_details']&.slice('credit_card_number', 'credit_card_company')&.merge(
       'status' => 'completed',
       'amount' => amount.to_f,
       'payment_method' => payment_method

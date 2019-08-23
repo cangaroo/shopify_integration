@@ -5,9 +5,9 @@ require "require_all"
 require_all File.dirname(__FILE__)
 
 class ShopifyEndpoint < EndpointBase::Sinatra::Base
-  post '/*_shipment' do # /add_shipment or /update_shipment
-    summary = Shopify::Shipment.new(@payload['shipment'], @config).ship!
 
+ post '/update_shipment' do
+    summary = Shopify::Shipment.new(@payload['shipment'], @config).ship!
     result 200, summary
   end
 
@@ -16,8 +16,18 @@ class ShopifyEndpoint < EndpointBase::Sinatra::Base
   ## add_ for product, customer
   ## update_ for product, customer
   ## set_inventory
-  post '/*_*' do |action, obj_name|
-    shopify_action "#{action}_#{obj_name}", obj_name.singularize
+
+
+  post '/get_unfulfilledorders' do
+    action='get_orders'
+    obj_name='shipments'
+    shopify_action "#{action}", obj_name.singularize
+  end
+
+  post '/get_products' do
+    action='get_products'
+    obj_name='products'
+    shopify_action "#{action}", obj_name.singularize
   end
 
   private
@@ -37,15 +47,8 @@ class ShopifyEndpoint < EndpointBase::Sinatra::Base
         response  = shopify.send(action)
 
         case action_type
-        when 'get'
+          when 'get'
           response['objects'].each do |obj|
-            ## Check if object has a metafield with a Wombat ID in it,
-            ## if so change object ID to that prior to adding to Wombat
-            wombat_id = shopify.wombat_id_metafield obj_name, obj['shopify_id']
-            unless wombat_id.nil?
-              obj['id'] = wombat_id
-            end
-
             ## Add object to Wombat
             add_object obj_name, obj
           end

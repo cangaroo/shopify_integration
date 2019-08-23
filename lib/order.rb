@@ -6,10 +6,16 @@ class Order
     @store_name = Util.shopify_host(shopify_api.config).split('.')[0]
     @order_number = shopify_order['order_number']
     @shopify_id = shopify_order['id']
+    @fulfillment_status=shopify_order['fulfillment_status']
+    @financial_status=shopify_order['financial_status']
+    @test = shopify_order['test']
     @source = Util.shopify_host shopify_api.config
     @status = 'completed'
     @email = shopify_order['email']
     @currency = shopify_order['currency']
+    @location_id = shopify_order['location_id']
+    @source_identifier = shopify_order['source_identifier']
+    @source_name = shopify_order['source_name']
     @placed_on = shopify_order['created_at']
     @totals_item = shopify_order['total_line_items_price'].to_f
     @totals_tax = shopify_order['total_tax'].to_f
@@ -70,10 +76,16 @@ class Order
 
   def wombat_obj
     {
-      'id' => @store_name.upcase + '-' + @order_number.to_s,
+      'id' => @order_number.to_s,
       'shopify_id' => @shopify_id.to_s,
+      'location_id' => @location_id,
+      'source_identifier' => @source_identifier,
+      'source_name' => @source_name,
+      'fulfillment_status' => @fulfillment_status,
+      'financial_status' => @financial_status,
+      'test'=>@test,
       'source' => @source,
-      'channel' => @source,
+      'channel' => 'Shopify',
       'status' => @status,
       'email' => @email,
       'currency' => @currency,
@@ -85,7 +97,7 @@ class Order
         'payment' => @totals_payment,
         'order' => @totals_order
       },
-      'line_items' => Util.wombat_array(@line_items),
+      'items' => Util.wombat_array(@line_items),
       'shipping_method' => @shipping_method,
       'adjustments' => [
         {
