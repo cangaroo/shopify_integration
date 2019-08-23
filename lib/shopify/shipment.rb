@@ -13,11 +13,14 @@ module Shopify
           api_post(
             "orders/#{shopify_order_id}/fulfillments.json",
             {
-              fulfillment: { tracking_number: @shipment['tracking'] }
+              fulfillment: { tracking_number: @shipment['tracking'],location_id: ENV.fetch('QUIET_SHOPIFY_LOCATION'),
+              tracking_company: @shipment['carrier']}
             }
           )
         rescue RestClient::UnprocessableEntity
-          raise "Shipment #{@shipment['id']} has already been marked as shipped on Shopify!"
+          if @fulfillment_status!= 'fulfilled'
+            raise "Shipment #{@shipment['id']} could not be marked as shipped on Shopify!"
+          end
         end
 
         "Updated shipment #{@shipment['id']} with tracking number #{@shipment['tracking']}."
@@ -27,25 +30,18 @@ module Shopify
     end
 
     def shopify_order_id
-      @shopify_order_id ||= @shipment['shopify_order_id'] || find_order_id_by_order_number(@shipment['order_id'])
+      @shopify_order_id ||= @shipment['shopify_order_id'] || find_order_id_by_order_number(@shipment['id'])
     end
 
     def find_order_id_by_order_number(order_number)
-      order_number = order_number.split("-").last
-      count = (api_get 'orders/count')['count']
-      page_size = 250
-      pages = (count / page_size.to_f).ceil
-      current_page = 1
+      if !order_number.nil?
+          response = api_get 'orders',{name:order_number,status:'any'}
 
-      while current_page <= pages do
-        response = api_get 'orders',
-                           {'limit' => page_size, 'page' => current_page}
-        current_page += 1
-        response['orders'].each do |order|
-          return order['id'].to_s if order['order_number'].to_s == order_number
-        end
+          response['orders'].each do |order|
+            @fulfillment_status = order['fulfillment_status']
+            return order['id'].to_s if  order['order_number'].to_s == order_number
+          end
       end
-
       return nil
     end
   end
