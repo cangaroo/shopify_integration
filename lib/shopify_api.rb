@@ -251,8 +251,13 @@ class ShopifyAPI
       params[:updated_at_min] = Time.at(@payload["last_poll"]).to_s(:iso8601)
     end
 
-    shopify_objs = api_get objs_name, params
-
+    current_page=1
+    page_limit=250
+    current_count=250
+  while current_count == page_limit do
+    shopify_objs = api_get objs_name, params.merge(:limit=>page_limit,:page=>current_page)
+    current_count=shopify_objs.to_h['products'].count||0
+    current_page += 1
     if shopify_objs.values.first.kind_of?(Array)
       shopify_objs.values.first.each do |shopify_obj|
         obj = obj_class.new
@@ -264,9 +269,9 @@ class ShopifyAPI
       obj.add_shopify_obj shopify_objs.values.first, self
       objs << obj
     end
-
-    objs
   end
+    objs
+end
 
   def find_variant_shopify_id(product_shopify_id, variant_sku)
     variants = api_get("products/#{product_shopify_id}/variants")["variants"]
