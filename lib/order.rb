@@ -8,6 +8,7 @@ class Order
     @shopify_id = shopify_order['id']
     @fulfillment_status=shopify_order['fulfillment_status']
     @financial_status=shopify_order['financial_status']
+    @tags=shopify_order['tags']
     @test = shopify_order['test']
     @source = Util.shopify_host shopify_api.config
     @status = 'completed'
@@ -84,6 +85,7 @@ class Order
       'fulfillment_status' => @fulfillment_status,
       'financial_status' => @financial_status,
       'test'=>@test,
+      'tags'=>@tags,
       'source' => @source,
       'channel' => 'Shopify',
       'status' => @status,
