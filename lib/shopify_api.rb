@@ -254,10 +254,14 @@ class ShopifyAPI
     current_page=1
     page_limit=250
     current_count=250
-    object=objs_name.split('_')[0]
+    type=objs_name.split('_')[0]
   while current_count == page_limit do
     shopify_objs = api_get objs_name, params.merge(:limit=>page_limit,:page=>current_page)
-    current_count=shopify_objs.to_h[object].count||0
+    if type.include?('/')
+      current_count=shopify_objs.to_h.count||0
+    else
+      current_count=shopify_objs.to_h[type].count||0
+    end
     current_page += 1
     if shopify_objs.values.first.kind_of?(Array)
       shopify_objs.values.first.each do |shopify_obj|
