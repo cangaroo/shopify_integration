@@ -248,7 +248,8 @@ class ShopifyAPI
     params = {}
 
     if @payload["last_poll"].present?
-      params[:updated_at_min] = Time.at(@payload["last_poll"]).to_s(:iso8601)
+      lastrun=Time.at(@payload["last_poll"]) - 40.seconds
+      params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
     end
 
     current_page=1
