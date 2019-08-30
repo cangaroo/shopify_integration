@@ -248,9 +248,10 @@ class ShopifyAPI
     params = {}
 
     if @payload["last_poll"].present?
-      lastrun=Time.at(@payload["last_poll"]) - 40.seconds
-      params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
-    end
+      lastrun=Time.at(@payload["last_poll"]) - 30.seconds
+      #utc params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
+      params[:updated_at_min] = Time.at(lastrun).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
+        end
 
     current_page=1
     page_limit=250
