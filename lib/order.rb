@@ -8,7 +8,7 @@ class Order
     @shopify_id = shopify_order['id']
     @fulfillment_status=shopify_order['fulfillment_status']
     @financial_status=shopify_order['financial_status']
-    @tags=shopify_order['tags']
+    @tags = shopify_order['tags']
     @test = shopify_order['test']
     @source = Util.shopify_host shopify_api.config
     @status = 'completed'
@@ -18,6 +18,7 @@ class Order
     @source_identifier = shopify_order['source_identifier']
     @source_name = shopify_order['source_name']
     @placed_on = shopify_order['created_at']
+    @cancelled_on=shopify_order['cancelled_at']
     @totals_item = shopify_order['total_line_items_price'].to_f
     @totals_tax = shopify_order['total_tax'].to_f
     @totals_discounts = -1 * shopify_order['total_discounts'].to_f
@@ -77,14 +78,15 @@ class Order
 
   def wombat_obj
     {
-      'id' => @shopify_id.to_s,
-      'order_number' => @order_number.to_s,
+      'id' => @order_number.to_s,
+      'order_number' => @shopify_id.to_s,
       'shopify_id' => @shopify_id.to_s,
       'location_id' => @location_id,
       'source_identifier' => @source_identifier,
       'source_name' => @source_name,
       'fulfillment_status' => @fulfillment_status,
       'financial_status' => @financial_status,
+      'cancelled_on'=> @cancelled_on,
       'test'=>@test,
       'tags'=>@tags,
       'source' => @source,
