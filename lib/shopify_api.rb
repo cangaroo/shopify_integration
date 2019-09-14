@@ -173,16 +173,21 @@ class ShopifyAPI
     inventory = Inventory.new
     inventory.add_wombat_obj @payload['inventory']
     puts "INV: " + @payload['inventory'].to_json
-    shopify_id = inventory.shopify_id.blank? ?
-                    find_product_shopify_id_by_sku(inventory.sku) : inventory.shopify_id
+    inventory_item_id = find_inventory_id_by_sku(inventory.sku)
 
-    message = 'Could not find item with SKU of ' + inventory.sku
-    unless shopify_id.blank?
-      result = api_put "variants/#{shopify_id}.json",
-                       {'variant' => inventory.shopify_obj}
+    unless inventory_item_id.blank?
       message = "Set inventory of SKU #{inventory.sku} " +
                 "to #{inventory.quantity}."
-    end
+      begin
+        message = 'Could not find item with SKU of ' + inventory.sku
+        result = api_post "inventory_levels/set.json",{'location_id':ENV.fetch('QUIET_SHOPIFY_LOCATION'),'inventory_item_id':inventory_item_id,'available': inventory.quantity}
+
+        rescue RestClient::UnprocessableEntity => e
+          result = api_put "inventory_items/#{inventory_item_id}.json",{"inventory_item": { "id": inventory_item_id, "tracked": true } }
+          result = api_post "inventory_levels/set.json",{'location_id':ENV.fetch('QUIET_SHOPIFY_LOCATION'),'inventory_item_id':inventory_item_id,'available': inventory.quantity}
+
+      end
+  end
     {
       'objects' => result,
       'message' => message
@@ -251,7 +256,7 @@ class ShopifyAPI
       lastrun=Time.at(@payload["last_poll"]) - 30.seconds
       #utc params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
       params[:updated_at_min] = Time.at(lastrun).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
-        end
+    end
 
     current_page=1
     page_limit=250
@@ -309,6 +314,26 @@ end
 
     return nil
   end
+end
+
+def find_inventory_id_by_sku sku
+  count = (api_get 'products/count')['count']
+  page_size = 250
+  pages = (count / page_size.to_f).ceil
+  current_page = 1
+
+  while current_page <= pages do
+    products = api_get 'products',
+                       {'limit' => page_size, 'page' => current_page}
+    current_page += 1
+    products['products'].each do |product|
+      product['variants'].each do |variant|
+        return variant['inventory_item_id'].to_s if variant['sku'] == sku
+      end
+    end
+  end
+
+  return nil
 end
 
 class AuthenticationError < StandardError; end

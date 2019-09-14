@@ -10,6 +10,7 @@ class Order
     @financial_status=shopify_order['financial_status']
     @tags = shopify_order['tags']
     @test = shopify_order['test']
+    @note = shopify_order['note']
     @source = Util.shopify_host shopify_api.config
     @status = 'completed'
     @email = shopify_order['email']
@@ -89,6 +90,7 @@ class Order
       'cancelled_on'=> @cancelled_on,
       'test'=>@test,
       'tags'=>@tags,
+      'note' => @note,
       'source' => @source,
       'channel' => 'Shopify',
       'status' => @status,

@@ -11,6 +11,12 @@ class ShopifyEndpoint < EndpointBase::Sinatra::Base
     result 200, summary
   end
 
+  post '/update_inventory' do
+    shopify = ShopifyAPI.new(@payload, @config)
+    summary = shopify.set_inventory
+    result 200, summary
+  end
+
   ## Supported endpoints:
   ## get_ for orders, products, inventories, shipments, customers
   ## add_ for product, customer
@@ -65,9 +71,9 @@ class ShopifyEndpoint < EndpointBase::Sinatra::Base
                        'shopify_id' => response['objects'][obj_name]['id'].to_s }
 
           ## Add metafield to track Wombat ID
-          shopify.add_metafield obj_name,
-                                response['objects'][obj_name]['id'].to_s,
-                                @payload[obj_name]['id']
+          #shopify.add_metafield obj_name,
+          #                      response['objects'][obj_name]['id'].to_s,
+          #                      @payload[obj_name]['id']
           end
 
         if response.has_key?('additional_objs') &&
