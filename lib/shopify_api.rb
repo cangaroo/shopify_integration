@@ -264,7 +264,6 @@ class ShopifyAPI
     type=objs_name.split('_')[0]
     sleep(0.3)
   while current_count == page_limit do
-    byebug
     if objs_name.start_with?('orders')  then params.merge!(:status=>'any') end
     shopify_objs = api_get objs_name, params.merge(:limit=>page_limit,:page=>current_page)
 
