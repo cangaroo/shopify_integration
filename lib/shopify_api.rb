@@ -256,6 +256,8 @@ class ShopifyAPI
       lastrun=Time.at(@payload["last_poll"]) - 30.seconds
       #utc params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
       params[:updated_at_min] = Time.at(lastrun).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
+      #limnit to onluy newish objects
+      params[:created_at_min] = (DateTime.now-30).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
     end
 
     current_page=1
@@ -264,7 +266,7 @@ class ShopifyAPI
     type=objs_name.split('_')[0]
     sleep(0.3)
   while current_count == page_limit do
-    if objs_name.start_with?('orders')  then params.merge!(:status=>'any') end
+    #if objs_name.start_with?('orders')  then params.merge!(:status=>'any') end
     shopify_objs = api_get objs_name, params.merge(:limit=>page_limit,:page=>current_page)
 
     if type.include?('/')
