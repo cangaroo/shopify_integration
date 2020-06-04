@@ -257,7 +257,7 @@ class ShopifyAPI
       #utc params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
       params[:updated_at_min] = Time.at(lastrun).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
       #limit to onluy newish objects
-      params[:created_at_min] = (DateTime.now-30).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
+      #params[:created_at_min] = (DateTime.now-30).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
     end
 
     current_page=1
