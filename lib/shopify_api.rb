@@ -7,32 +7,32 @@ class ShopifyAPI
 
   attr_accessor :order, :config, :payload, :request
 
-  def initialize payload, config={}
+  def initialize(payload, config = {})
     @payload = payload
     @config = config
   end
 
   def get_products
-    inventories = Array.new
+    inventories = []
     products = get_objs('products', Product)
     products.each do |product|
-      unless product.variants.nil?
-        product.variants.each do |variant|
-          unless variant.sku.blank?
-            inventory = Inventory.new
-            inventory.add_obj variant
-            inventories << inventory.wombat_obj
-          end
-        end
+      next if product.variants.nil?
+
+      product.variants.each do |variant|
+        next if variant.sku.blank?
+
+        inventory = Inventory.new
+        inventory.add_obj variant
+        inventories << inventory.wombat_obj
       end
     end
 
     {
       'objects' => Util.wombat_array(products),
       'message' => "Successfully retrieved #{products.length} products " +
-                   "from Shopify."
-      #,'additional_objs' => inventories,
-      #'additional_objs_name' => 'inventory'
+        'from Shopify.'
+      # ,'additional_objs' => inventories,
+      # 'additional_objs_name' => 'inventory'
     }
   end
 
@@ -41,23 +41,23 @@ class ShopifyAPI
   end
 
   def get_inventory
-    inventories = Array.new
+    inventories = []
     get_objs('products', Product).each do |product|
-      unless product.variants.nil?
-        product.variants.each do |variant|
-          unless variant.sku.blank?
-            inventory = Inventory.new
-            inventory.add_obj variant
-            inventories << inventory.wombat_obj
-          end
-        end
+      next if product.variants.nil?
+
+      product.variants.each do |variant|
+        next if variant.sku.blank?
+
+        inventory = Inventory.new
+        inventory.add_obj variant
+        inventories << inventory.wombat_obj
       end
     end
-    get_reply inventories, "Retrieved inventories."
+    get_reply inventories, 'Retrieved inventories.'
   end
 
   def get_shipments
-    shipments = Array.new
+    shipments = []
     get_objs('orders', Order).each do |order|
       shipments += shipments(order.shopify_id)
     end
@@ -71,20 +71,20 @@ class ShopifyAPI
     response = {
       'objects' => orders,
       'message' => "Successfully retrieved #{orders.length} orders " +
-                   "from Shopify."
+                   'from Shopify.'
     }
 
     # config to return corresponding shipments
     if @config[:create_shipments].to_i == 1
-      shipments = Array.new
+      shipments = []
       orders.each do |order|
         shipments << Shipment.wombat_obj_from_order(order)
       end
 
       response.merge({
-        'additional_objs' => shipments,
-        'additional_objs_name' => 'shipment'
-      })
+                       'additional_objs' => shipments,
+                       'additional_objs_name' => 'shipment'
+                     })
     else
       response
     end
@@ -97,8 +97,8 @@ class ShopifyAPI
 
     {
       'objects' => result,
-      'message' => "Product added with Shopify ID of " +
-                   "#{result['product']['id']} was added."
+      'message' => 'Product added with Shopify ID of ' +
+        "#{result['product']['id']} was added."
     }
   end
 
@@ -130,8 +130,8 @@ class ShopifyAPI
 
     {
       'objects' => master_result,
-      'message' => "Product with Shopify ID of " +
-                   "#{master_result['product']['id']} was updated."
+      'message' => 'Product with Shopify ID of ' +
+        "#{master_result['product']['id']} was updated."
     }
   end
 
@@ -142,8 +142,8 @@ class ShopifyAPI
 
     {
       'objects' => result,
-      'message' => "Customer with Shopify ID of " +
-                   "#{result['customer']['id']} was added."
+      'message' => 'Customer with Shopify ID of ' +
+        "#{result['customer']['id']} was added."
     }
   end
 
@@ -153,26 +153,26 @@ class ShopifyAPI
 
     begin
       result = api_put "customers/#{customer.shopify_id}.json",
-                     customer.shopify_obj
+                       customer.shopify_obj
     rescue RestClient::UnprocessableEntity => e
       # retries without addresses to avoid duplication bug
       customer_without_addresses = customer.shopify_obj
-      customer_without_addresses["customer"].delete("addresses")
+      customer_without_addresses['customer'].delete('addresses')
 
       result = api_put "customers/#{customer.shopify_id}.json", customer_without_addresses
     end
 
     {
       'objects' => result,
-      'message' => "Customer with Shopify ID of " +
-                   "#{result['customer']['id']} was updated."
+      'message' => 'Customer with Shopify ID of ' +
+        "#{result['customer']['id']} was updated."
     }
   end
 
   def set_inventory
     inventory = Inventory.new
     inventory.add_wombat_obj @payload['inventory']
-    puts "INV: " + @payload['inventory'].to_json
+    puts 'INV: ' + @payload['inventory'].to_json
     inventory_item_id = find_inventory_id_by_sku(inventory.sku)
 
     unless inventory_item_id.blank?
@@ -180,31 +180,29 @@ class ShopifyAPI
                 "to #{inventory.quantity}."
       begin
         message = 'Could not find item with SKU of ' + inventory.sku
-        result = api_post "inventory_levels/set.json",{'location_id':ENV.fetch('QUIET_SHOPIFY_LOCATION'),'inventory_item_id':inventory_item_id,'available': inventory.quantity}
-
-        rescue RestClient::UnprocessableEntity => e
-          result = api_put "inventory_items/#{inventory_item_id}.json",{"inventory_item": { "id": inventory_item_id, "tracked": true } }
-          result = api_post "inventory_levels/set.json",{'location_id':ENV.fetch('QUIET_SHOPIFY_LOCATION'),'inventory_item_id':inventory_item_id,'available': inventory.quantity}
-
+        result = api_post 'inventory_levels/set.json', { 'location_id': ENV.fetch('QUIET_SHOPIFY_LOCATION'), 'inventory_item_id': inventory_item_id, 'available': inventory.quantity }
+      rescue RestClient::UnprocessableEntity => e
+        result = api_put "inventory_items/#{inventory_item_id}.json", { "inventory_item": { "id": inventory_item_id, "tracked": true } }
+        result = api_post 'inventory_levels/set.json', { 'location_id': ENV.fetch('QUIET_SHOPIFY_LOCATION'), 'inventory_item_id': inventory_item_id, 'available': inventory.quantity }
       end
-  end
+    end
     {
       'objects' => result,
       'message' => message
     }
   end
 
-  def add_metafield obj_name, shopify_id, wombat_id
-    api_obj_name = (obj_name == "inventory" ? "product" : obj_name)
+  def add_metafield(obj_name, shopify_id, _wombat_id)
+    api_obj_name = (obj_name == 'inventory' ? 'product' : obj_name)
 
     api_post "#{api_obj_name}s/#{shopify_id}/metafields.json",
              Metafield.new(@payload[obj_name]['id']).shopify_obj
   end
 
-  def wombat_id_metafield obj_name, shopify_id
+  def wombat_id_metafield(obj_name, shopify_id)
     wombat_id = nil
 
-    api_obj_name = (obj_name == "inventory" ? "product" : obj_name)
+    api_obj_name = (obj_name == 'inventory' ? 'product' : obj_name)
 
     metafields_array = api_get "#{api_obj_name}s/#{shopify_id}/metafields"
     unless metafields_array.nil? || metafields_array['metafields'].nil?
@@ -219,95 +217,97 @@ class ShopifyAPI
     wombat_id
   end
 
-  def order order_id
+  def order(order_id)
     get_objs "orders/#{order_id}", Order
   end
 
-  def transactions order_id
+  def transactions(order_id)
     get_objs "orders/#{order_id}/transactions", Transaction
   end
 
-  def shipments order_id
+  def shipments(order_id)
     get_objs "orders/#{order_id}/fulfillments", Shipment
   end
 
-
   private
 
-  def get_webhook_results obj_name, obj, get_objs = true
+  def get_webhook_results(obj_name, obj, get_objs = true)
     objs = Util.wombat_array(get_objs ? get_objs(obj_name, obj) : obj)
     get_reply objs, "Successfully retrieved #{objs.length} #{obj_name} " +
-                    "from Shopify."
+                    'from Shopify.'
   end
 
-  def get_reply objs, message
+  def get_reply(objs, message)
     {
       'objects' => objs,
       'message' => message
     }
   end
 
-  def get_objs objs_name, obj_class
-    objs = Array.new
+  def get_objs(objs_name, obj_class)
+    objs = []
 
     params = {}
 
-    if @payload["last_poll"].present?
-      lastrun=Time.at(@payload["last_poll"]) - 30.seconds
-      #utc params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
+    if @payload['last_poll'].present?
+      lastrun = Time.at(@payload['last_poll']) - 30.seconds
+      # utc params[:updated_at_min] = Time.at(lastrun).to_s(:iso8601)
       params[:updated_at_min] = Time.at(lastrun).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
-      #limit to onluy newish objects
-      #params[:created_at_min] = (DateTime.now-30).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
+      # limit to only newish objects
+      # params[:created_at_min] = (DateTime.now-30).in_time_zone('Eastern Time (US & Canada)').to_s(:iso8601)
     end
 
-    current_page=1
-    page_limit=250
-    current_count=250
-    type=objs_name.split('_')[0]
     sleep(0.3)
-  while current_count == page_limit do
-    #:status=>'open'
-    if objs_name.start_with?('orders')  then params.merge!(:fulfillment_status=>'unfulfilled') end
-    shopify_objs = api_get objs_name, params.merge(:limit=>page_limit,:page=>current_page)
 
-    if type.include?('/')
-      current_count=shopify_objs.to_h.count||0
-    else
-      current_count=shopify_objs.to_h[type].count||0
-    end
-    current_page += 1
-    if shopify_objs.values.first.kind_of?(Array)
-      shopify_objs.values.first.each do |shopify_obj|
+    # get first record set
+
+    params.merge!(fulfillment_status: 'unfulfilled') if objs_name.start_with?('orders')
+    params.merge!(limit: 250)
+
+    more_data = true
+    while more_data
+
+      shopify_objs = if link.nil?
+                       api_get objs_name, params
+                     else api_get objs_name, { link: link }
+                     end
+
+      link = shopify_objs.to_h['link']
+      more_data = !link.nil?
+
+      if shopify_objs.values.first.is_a?(Array)
+        shopify_objs.values.first.each do |shopify_obj|
+          obj = obj_class.new
+          obj.add_shopify_obj shopify_obj, self
+          objs << obj
+        end
+      else
         obj = obj_class.new
-        obj.add_shopify_obj shopify_obj, self
+        obj.add_shopify_obj shopify_objs.values.first, self
         objs << obj
       end
-    else
-      obj = obj_class.new
-      obj.add_shopify_obj shopify_objs.values.first, self
-      objs << obj
+
     end
-  end
     objs
-end
+  end
 
   def find_variant_shopify_id(product_shopify_id, variant_sku)
-    variants = api_get("products/#{product_shopify_id}/variants")["variants"]
+    variants = api_get("products/#{product_shopify_id}/variants")['variants']
 
-    if variant = variants.find {|v| v["sku"] == variant_sku}
-      variant["id"]
+    if variant = variants.find { |v| v['sku'] == variant_sku }
+      variant['id']
     end
   end
 
-  def find_product_shopify_id_by_sku sku
+  def find_product_shopify_id_by_sku(sku)
     count = (api_get 'products/count')['count']
     page_size = 250
     pages = (count / page_size.to_f).ceil
     current_page = 1
 
-    while current_page <= pages do
+    while current_page <= pages
       products = api_get 'products',
-                         {'limit' => page_size, 'page' => current_page}
+                         { 'limit' => page_size, 'page' => current_page }
       current_page += 1
       products['products'].each do |product|
         product['variants'].each do |variant|
@@ -316,19 +316,19 @@ end
       end
     end
 
-    return nil
+    nil
   end
 end
 
-def find_inventory_id_by_sku sku
+def find_inventory_id_by_sku(sku)
   count = (api_get 'products/count')['count']
   page_size = 250
   pages = (count / page_size.to_f).ceil
   current_page = 1
 
-  while current_page <= pages do
+  while current_page <= pages
     products = api_get 'products',
-                       {'limit' => page_size, 'page' => current_page}
+                       { 'limit' => page_size, 'page' => current_page }
     current_page += 1
     products['products'].each do |product|
       product['variants'].each do |variant|
@@ -337,7 +337,7 @@ def find_inventory_id_by_sku sku
     end
   end
 
-  return nil
+  nil
 end
 
 class AuthenticationError < StandardError; end
