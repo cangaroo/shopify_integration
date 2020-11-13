@@ -52,4 +52,8 @@ class Util
     wombat_config['shopify_host']
   end
 
+  def self.shopify_version wombat_config
+    wombat_config['shopify_version']
+  end
+
 end

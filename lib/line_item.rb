@@ -9,6 +9,9 @@ class LineItem
     @name = shopify_li['name']
     @quantity = shopify_li['quantity'].to_i
     @price = shopify_li['price'].to_f
+    @requires_shipping = shopify_li['requires_shipping']
+    @gift_card = shopify_li['gift_card']
+    @fulfillment_status = shopify_li['fulfillment_status']
 
     self
   end
@@ -21,7 +24,10 @@ class LineItem
         'shopify_parent_id' => @shopify_parent_id.to_s,
         'name' => @name,
         'quantity' => @quantity,
-        'price' => @price
+        'price' => @price,
+        'requires_shipping' => @requires_shipping,
+        'gift_card' => @gift_card,
+        'fulfillment_status' => @fulfillment_status
       }
     ]
   end

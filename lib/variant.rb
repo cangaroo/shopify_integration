@@ -72,6 +72,7 @@ class Variant
   def wombat_obj
     {
       'sku' => @sku,
+      'name'=>  @name,
       'shopify_id' => @shopify_id.to_s,
       'shopify_parent_id' => @shopify_parent_id.to_s,
       'shipping_category' => @shipping_category,

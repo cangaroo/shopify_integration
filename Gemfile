@@ -1,33 +1,22 @@
-ruby '2.1.2'
+ruby '2.7.1'
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'tilt', '~> 1.4.1'
-gem 'tilt-jbuilder'
-gem 'jbuilder', '2.0.7'
-gem 'capistrano'
-gem 'rest-client'
-gem 'require_all'
+gemspec
+
+gem 'endpoint_base', git: 'https://github.com/Follain/endpoint_base'
 
 group :development do
-  gem 'shotgun'
-  gem 'pry'
   gem 'awesome_print'
+  gem 'pry'
+  gem 'shotgun'
 end
 
 group :test do
-  gem 'vcr'
-  gem 'rspec'
-  gem 'webmock'
   gem 'guard-rspec'
-  gem 'terminal-notifier-guard'
-  gem 'rb-fsevent', '~> 0.9.1'
   gem 'rack-test'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rspec'
+  gem 'terminal-notifier-guard'
+  gem 'vcr'
+  gem 'webmock'
 end
-
-group :production do
-  gem 'foreman', '0.66.0'
-  gem 'unicorn'
-end
-
-gem 'endpoint_base', github: 'spree/endpoint_base'
